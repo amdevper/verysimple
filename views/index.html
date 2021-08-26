@@ -33,7 +33,7 @@
             <h1 class="display-3">a very simple node application</h1>
             <p class="lead">play ground for node application</p>
             <hr class="my-2">
-            <p>Socket playground</p>
+            <p id="messagelatest">Socket playground</p>
             <p class="lead">
                 <a class="btn btn-primary btn-lg" href="Jumbo action link" role="button">details page</a>
             </p>
@@ -59,7 +59,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td scope="row" id="servcli1">data #1</td>
+                            <td scope="row" id="servcli1dsp">data #1</td>
                             <td>data #2</td>
                             <td>data #3</td>
                         </tr>
@@ -109,29 +109,41 @@
 
     </footer>
 
-    <script>
-        function fcn1() {
-            console.log('Function no,1 is called')
-            $("#disconnectbadge").hide()
-        }
-        function fcn2() {
-            console.log('Function no,2 is called')
-            $("#disconnectbadge").show()
-        }
-        function fcn3() {
-            //console.log('Function no,3 is called')
-            $("#servcli1").fadeIn("slow", "swing", () => {
-                console.log('completed')
-            })
-        }
-    </script>
+    
     <script>
         const socket = io()
         socket.on('connection',()=>{
             socket.emit('clitoserv','hi server i am client')
             console.log('i sent to server')
         })
+        socket.on("servcli1",(servcli1)=>{
+            $("#servcli1dsp").html(servcli1.currentDate)
+        })
+        socket.on("srvcli",(data)=>{
+            $("#messagelatest").html("Thailand")
+        })
+
     </script>
+
+<script>
+    function fcn1() {
+        console.log('Function no,1 is called')
+        //$("#disconnectbadge").hide()
+        socket.emit("srvcli","The button1")
+    }
+    function fcn2() {
+        console.log('Function no,2 is called')
+        //$("#disconnectbadge").show()
+        socket.emit("srvcli","FCN 2")
+    }
+    function fcn3() {
+        //console.log('Function no,3 is called')
+        //$("#servcli1dsp").html("Click from pb3")
+        socket.emit("srvcli","FCN 3")
+
+        
+    }
+</script>
 </body>
 
 </html>
