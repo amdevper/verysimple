@@ -1,2 +1,2 @@
 # verysimple
-This is very simple web application
+This is very simple web application created by node.js 
