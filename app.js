@@ -8,6 +8,11 @@ app.get("/", (req, res) => {
     root: path.join(__dirname, "./views"),
   });
 });
+app.get("/details",(req,res)=>{
+  res.sendFile("details.html",{
+    root: path.join(__dirname, "./views"),
+  })
+})
 //res.send("<h1>Hello app</h1>")
 
 const server = app.listen(PORT);
