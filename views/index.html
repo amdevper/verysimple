@@ -120,6 +120,14 @@
             $("#servcli1dsp").html(data1.currentDate)
             console.log(data1)
         })
+        socket.on("servcli1cont",(data)=>{
+            if(data == "on"){
+                $("#servcli1dsp").css({"background-color":"yellow"})
+            }
+            if(data == "off"){
+                $("#servcli1dsp").css({"background-color":"white"})
+            }
+        })
         socket.on("servcli2",(data1)=>{
             $("#servcli2dsp").html(data1.currentDate)
             console.log(data1)

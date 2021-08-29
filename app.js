@@ -22,16 +22,27 @@ io.on("connection", (socket) => {
       console.log("Receive from client :",message)
   })
   
+  io.sockets.emit("servcli1cont","on")
 });
 
 
-
+var count = 0
 //io.socket.emit('data1','i send data 1')
 setInterval(function () {
   var currentDate = new Date();
+  //var count = 0
+  count ++
 
   io.sockets.emit("servcli1", { currentDate: currentDate });
   console.log('i send and emit every 1s.')
+  if(count%2 == 0){
+    io.sockets.emit("servcli1cont","on")
+    //count = 0
+  }
+  if(count%2 != 0){
+    io.sockets.emit("servcli1cont","off")
+    //count = 1
+  }
 }, 1000);
 
 setInterval(function () {
