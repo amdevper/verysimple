@@ -42,7 +42,7 @@
     <div class="container-fluid">
       <div class="jumbotron">
         <h1 class="display-3">a very simple node application</h1>
-        <p class="lead">play ground for node application</p>
+        <p class="lead" id="lastmsg">play ground for node application</p>
         <hr class="my-2" />
         <p id="messagelatest">Socket playground</p>
         <p class="lead">
@@ -163,6 +163,10 @@
         $('#servcli3dsp').html(data1.currentDate)
         console.log(data1)
       })
+      socket.on('lastmsg',(data)=>{
+        $('#lastmsg').html(data)
+      })
+
     </script>
 
     <script>
