@@ -60,8 +60,8 @@
                     <tbody>
                         <tr>
                             <td scope="row" id="servcli1dsp">data #1</td>
-                            <td>data #2</td>
-                            <td>data #3</td>
+                            <td id="servcli2dsp">data #2</td>
+                            <td id="servcli3dsp">data #3</td>
                         </tr>
 
                     </tbody>
@@ -116,12 +116,19 @@
             socket.emit('clitoserv','hi server i am client')
             console.log('i sent to server')
         })
-        socket.on("servcli1",(servcli1)=>{
-            $("#servcli1dsp").html(servcli1.currentDate)
+        socket.on("servcli1",(data1)=>{
+            $("#servcli1dsp").html(data1.currentDate)
+            console.log(data1)
         })
-        socket.on("srvcli",(data)=>{
-            $("#messagelatest").html("Thailand")
+        socket.on("servcli2",(data1)=>{
+            $("#servcli2dsp").html(data1.currentDate)
+            console.log(data1)
         })
+        socket.on("servcli3",(data1)=>{
+            $("#servcli3dsp").html(data1.currentDate)
+            console.log(data1)
+        })
+        
 
     </script>
 
