@@ -39,7 +39,7 @@ setInterval(function () {
   count ++
 
   io.sockets.emit("servcli1", { currentDate: currentDate });
-  console.log('i send and emit every 1s.')
+  //console.log('i send and emit every 1s.')
   if(count%2 == 0){
     io.sockets.emit("servcli1cont","on")
     //count = 0
@@ -54,12 +54,12 @@ setInterval(function () {
   var currentDate = new Date();
 
   io.sockets.emit("servcli2", { currentDate: currentDate });
-  console.log('i send and emit every 5s.')
+  //console.log('i send and emit every 5s.')
 }, 5000);
 
 setInterval(function () {
   var currentDate = new Date();
 
   io.sockets.emit("servcli3", { currentDate: currentDate });
-  console.log('i send and emit every 10s.')
+  //console.log('i send and emit every 10s.')
 }, 10000);
