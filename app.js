@@ -32,6 +32,9 @@ io.on("connection", (socket) => {
 
 
 var count = 0
+if (count == 3){
+  count = 0
+}
 //io.socket.emit('data1','i send data 1')
 setInterval(function () {
   var currentDate = new Date();
