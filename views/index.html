@@ -1,164 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
 
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.3/socket.io.js"
-        integrity="sha512-PU5S6BA03fRv1Q5fpwXjg5nlRrgdoguZ74urFInkbABMCENyx5oP3hrDzYMMPh3qdLdknIvrGj3yqZ4JuU7Nag=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.3/socket.io.js"
+      integrity="sha512-PU5S6BA03fRv1Q5fpwXjg5nlRrgdoguZ74urFInkbABMCENyx5oP3hrDzYMMPh3qdLdknIvrGj3yqZ4JuU7Nag=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
 
     <title>A very simple Node Application</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="container-fluid">
-        <div class="jumbotron">
-            <h1 class="display-3">a very simple node application</h1>
-            <p class="lead">play ground for node application</p>
-            <hr class="my-2">
-            <p id="messagelatest">Socket playground</p>
-            <p class="lead">
-                <a class="btn btn-primary btn-lg" href="Jumbo action link" role="button">details page</a>
-            </p>
+      <div class="jumbotron">
+        <h1 class="display-3">a very simple node application</h1>
+        <p class="lead">play ground for node application</p>
+        <hr class="my-2" />
+        <p id="messagelatest">Socket playground</p>
+        <p class="lead">
+          <a
+            class="btn btn-primary btn-lg"
+            href="Jumbo action link"
+            role="button"
+            >details page</a
+          >
+        </p>
+      </div>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="mr-3">
+            <h2>server to client :</h2>
+          </div>
+          <div>
+            <span class="badge badge-pill badge-success" id="connectbadge"
+              >connected</span
+            >
+            <span class="badge badge-pill badge-warning" id="disconnectbadge"
+              >not connected</span
+            >
+          </div>
         </div>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="mr-3">
-                    <h2>server to client : </h2>
-                </div>
-                <div>
-                    <span class="badge badge-pill badge-success" id="connectbadge">connected</span>
-                    <span class="badge badge-pill badge-warning" id="disconnectbadge">not connected</span>
-                </div>
-            </div>
-            <div class="row">
-                <table class="table">
-                    <thead>
-                        <tr class="bg-warning">
-                            <th>Data #1 [↓]</th>
-                            <th>Data #2 [↓]</th>
-                            <th>Data #3 [↓]</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td scope="row" id="servcli1dsp">data #1</td>
-                            <td id="servcli2dsp">data #2</td>
-                            <td id="servcli3dsp">data #3</td>
-                        </tr>
-
-                    </tbody>
-                </table>
-            </div>
-
-
-            <hr>
-            <div class="row">
-                <div class="mr-3">
-                    <h2>client to server : </h2>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="btn-group mb-2" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-primary" onclick="fcn1()">Function (1)</button>
-                    <button type="button" class="btn btn-warning" onclick="fcn2()">Function (2)</button>
-                    <button type="button" class="btn btn-primary" onclick="fcn3()">Function (3)</button>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="container"></div>
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Data to server"
-                        aria-label="Data that need to send to the server" aria-describedby="button-addon2">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Send to
-                            server</button>
-                    </div>
-                </div>
-            </div>
-
-
-
-
-
+        <div class="row">
+          <table class="table">
+            <thead>
+              <tr class="bg-warning">
+                <th>Data #1 [↓]</th>
+                <th>Data #2 [↓]</th>
+                <th>Data #3 [↓]</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" id="servcli1dsp">data #1</td>
+                <td id="servcli2dsp">data #2</td>
+                <td id="servcli3dsp">data #3</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
+
+        <hr />
+        <div class="row">
+          <div class="mr-3">
+            <h2>client to server :</h2>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="btn-group mb-2" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-primary" onclick="fcn1()">
+              Function (1)
+            </button>
+            <button type="button" class="btn btn-warning" onclick="fcn2()">
+              Function (2)
+            </button>
+            <button type="button" class="btn btn-primary" onclick="fcn3()">
+              Function (3)
+            </button>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="container"></div>
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Data to server"
+              aria-label="Data that need to send to the server"
+              aria-describedby="button-addon2"
+            />
+            <div class="input-group-append">
+              <button
+                class="btn btn-outline-secondary"
+                type="button"
+                id="button-addon2"
+                onclick="fcn4()"
+              >
+                Send to server
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="container"></div>
 
-    <footer class="mb-3">
+    <footer class="mb-3"></footer>
 
-    </footer>
-
-    
     <script>
-        const socket = io()
-        socket.on('connection',()=>{
-            socket.emit('clitoserv','hi server i am client')
-            console.log('i sent to server')
-        })
-        socket.on("servcli1",(data1)=>{
-            $("#servcli1dsp").html(data1.currentDate)
-            console.log(data1)
-        })
-        socket.on("servcli1cont",(data)=>{
-            if(data == "on"){
-                $("#servcli1dsp").css({"background-color":"#df4759"})
-            }
-            if(data == "off"){
-                $("#servcli1dsp").css({"background-color":""})
-            }
-        })
-        socket.on("servcli2",(data1)=>{
-            $("#servcli2dsp").html(data1.currentDate)
-            console.log(data1)
-        })
-        socket.on("servcli3",(data1)=>{
-            $("#servcli3dsp").html(data1.currentDate)
-            console.log(data1)
-        })
-        
-
+      const socket = io()
+      socket.on('connection', () => {
+        socket.emit('clitoserv', 'hi server i am client')
+        console.log('i sent to server')
+      })
+      socket.on('servcli1', data1 => {
+        $('#servcli1dsp').html(data1.currentDate)
+        console.log(data1)
+      })
+      socket.on('servcli1cont', data => {
+        if (data == 'on') {
+          $('#servcli1dsp').css({ 'background-color': '#df4759' })
+        }
+        if (data == 'off') {
+          $('#servcli1dsp').css({ 'background-color': '' })
+        }
+      })
+      socket.on('servcli2', data1 => {
+        $('#servcli2dsp').html(data1.currentDate)
+        console.log(data1)
+      })
+      socket.on('servcli3', data1 => {
+        $('#servcli3dsp').html(data1.currentDate)
+        console.log(data1)
+      })
     </script>
 
-<script>
-    function fcn1() {
+    <script>
+      function fcn1 () {
         console.log('Function no,1 is called')
         //$("#disconnectbadge").hide()
-        socket.emit("srvcli","The button1")
-    }
-    function fcn2() {
+        socket.emit('srvcli', 'The button1')
+      }
+      function fcn2 () {
         console.log('Function no,2 is called')
         //$("#disconnectbadge").show()
-        socket.emit("srvcli","FCN 2")
-    }
-    function fcn3() {
+        socket.emit('srvcli', 'FCN 2')
+      }
+      function fcn3 () {
         //console.log('Function no,3 is called')
         //$("#servcli1dsp").html("Click from pb3")
-        socket.emit("srvcli","FCN 3")
-
-        
-    }
-</script>
-</body>
-
+        socket.emit('srvcli', 'FCN 3')
+      }
+      function fcn4(){
+          socket.emit('srvcli','FCN4 called')
+      }
+    </script>
+  </body>
 </html>
