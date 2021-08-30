@@ -29,6 +29,7 @@ io.on("connection", (socket) => {
   socket.on('lastmsg',(msg)=>{
     console.log('Received',msg)
     io.sockets.emit('lastmsg',msg)
+    
   })
   
   io.sockets.emit("servcli1cont","on")
