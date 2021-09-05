@@ -59,7 +59,7 @@ setInterval(function () {
     io.sockets.emit("servcli1cont","off")
     //count = 1
   }
-}, 1000);
+}, 500);
 
 setInterval(function () {
   var currentDate = new Date();
